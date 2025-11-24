@@ -1,47 +1,181 @@
-/* =====   エントランス ===== */
+/* ===== 共通 ===== */
+* {
+    box-sizing: border-box;
+}
+body {
+    margin: 0;
+    font-family: "MS Pゴシック", "ヒラギノ角ゴ ProN W3", sans-serif;
+    background: #000011;
+    color: #f5f5ff;
+    cursor: url("../cursors/pointer.cur"), auto;
+}
+a {
+    color: #ffcc66;
+    text-decoration: none;
+}
+a:hover {
+    text-decoration: underline;
+    cursor: url("../cursors/link.cur"), pointer;
+}
+
+/* ===== エントランス ===== */
 body.entrance {
     display: flex;
     align-items: center;
     justify-content: center;
     min-height: 100vh;
-    background: #000011;
-    color: #f5f5ff;
-    margin: 0;
-    font-family: "MS Pゴシック", "ヒラギノ角ゴ ProN W3", sans-serif;
-    cursor: url("../cursors/pointer.cur"), auto;
 }
-
 .entrance-box {
     border: 2px solid #ffcc66;
     padding: 24px 40px;
     background: #111133;
     text-align: center;
     max-width: 500px;
-    box-shadow: 0 0 10px #000;
 }
-
-.site-title {
+.entrance-box h1 {
     margin-top: 0;
-    margin-bottom: 16px;
     font-size: 2rem;
-    letter-spacing: 1px;
 }
-
-.notice-text {
-    font-size: 0.9rem;
-    line-height: 1.6;
-}
-
 .enter-button {
     margin-top: 16px;
     padding: 8px 24px;
     border: 1px solid #ffcc66;
     background: #222244;
     color: #ffcc66;
-    font-size: 0.95rem;
-    cursor: url("../cursors/pointer.cur"), auto;
 }
-.enter-button:hover {
-    background: #333355;
-    text-shadow: 0 0 3px #ffcc66;
+
+/* =====  ホーム ===== */
+.layout {
+    display: flex;
+    min-height: 100vh;
+}
+.sidebar {
+    width: 220px;
+    padding: 16px;
+    background: #111122;
+    border-right: 2px solid #444466;
+}
+.content {
+    flex: 1;
+    padding: 16px 24px;
+}
+
+/* Title */
+.site-title {
+    font-size: 1.4rem;
+    margin: 0 0 12px 0;
+    text-shadow: 0 0 4px #ffcc66;
+}
+
+/* Banner */
+.site-banner img {
+    width: 100%;
+    display: block;
+    margin-bottom: 16px;
+    border: 1px solid #444466;
+}
+
+/* Menu */
+.menu ul {
+    list-style: none;
+    padding-left: 0;
+}
+.menu li {
+    margin-bottom: 8px;
+}
+
+/* Counter */
+.counter-box {
+    margin-top: 20px;
+    padding-top: 8px;
+    border-top: 1px solid #444466;
+    font-size: 0.8rem;
+}
+#counter-digits {
+    display: inline-flex;
+    margin: 0 4px;
+}
+.counter-digit {
+    width: 14px;
+    height: 20px;
+    image-rendering: pixelated;
+}
+
+/* Section Titles */
+section {
+    margin-bottom: 32px;
+}
+section h2 {
+    border-bottom: 1px dashed #666699;
+    padding-bottom: 4px;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+}
+
+/* Illust / Novel Lists */
+.illust-list,
+.novel-list {
+    list-style: none;
+    padding-left: 0;
+}
+.illust-list li,
+.novel-list li {
+    margin-bottom: 6px;
+}
+.marker-square {
+    color: #99ffcc;
+    margin-right: 6px;
+}
+.marker-circle {
+    color: #ff99cc;
+    margin-right: 6px;
+}
+
+/* Members */
+.member-list {
+    list-style: none;
+    padding-left: 0;
+}
+.member-list li {
+    margin-bottom: 12px;
+}
+.member-name {
+    font-size: 0.9rem;
+}
+.space {
+    margin-left: 6px;
+    font-size: 0.8rem;
+    color: #aaaadd;
+}
+.member-banner-link img {
+    margin-top: 4px;
+    max-width: 180px;
+    border: 1px solid #444466;
+}
+
+/* MIDI Button */
+.midi-player {
+    position: fixed;
+    top: 8px;
+    right: 8px;
+    z-index: 1000;
+}
+#midi-toggle {
+    padding: 4px 10px;
+    font-size: 0.75rem;
+    border: 1px solid #ffcc66;
+    background: #111122;
+    color: #ffcc66;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+.layout {
+    flex-direction: column;
+}
+.sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 2px solid #444466;
+}
 }

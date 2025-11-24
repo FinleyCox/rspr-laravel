@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>リゾプロ - Home</title>
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body class="home">
+    <div class="midi-player">
+        <button id="midi-toggle">♪ BGM ON</button>
+        <audio id="bgm" loop>
+        <source src="midi/opening.mid" type="audio/midi">
+            <!--  メモ：ブラウザによって再生不可の場合あり  TODO：つけるなら音を探してくる-->
+            ブラウザによっては再生されない場合があります。
+        </audio>
+    </div>
+    <div class="layout">
+        <!-- サイドバー -->
+        <aside class="sidebar">
+            <h1 class="site-title">リゾプロ</h1>
+            <nav class="menu">
+                <ul>
+                <li><a href="#illust-section">イラスト置き場</a></li>
+                <li><a href="#novel-section">小説置き場</a></li>
+                <li><a href="#members-section">参加メンバー</a></li>
+                </ul>
+            </nav>
+            <div class="counter-box">
+                <div>COUNTER</div>
+                <div id="counter">
+                あなたは <span id="counter-digits"></span> 人目の訪問者です。
+                </div>
+            </div>
+        </aside>
+        <!-- 真ん中 -->
+        <main class="content">
+            <section id="illust-section">
+                <h2>イラスト置き場</h2>
+                <ul class="illust-list">
+                <li><span class="marker-square">■</span><a href="illust/illust01.html">リゾプロエロ</a></li>
+                <li><span class="marker-square">■</span><a href="illust/illust02.html">手コキ</a></li>
+                <li><span class="marker-square">■</span><a href="illust/illust03.html">女体化</a></li>
+                </ul>
+            </section>
+            <section id="novel-section">
+                <h2>小説置き場</h2>
+                <ul class="novel-list">
+                <li><span class="marker-circle">①</span><a href="novel/novel01.html">短編「リゾプロ最高ー！」</a></li>
+                <li><span class="marker-circle">②</span><a href="novel/novel02.html">中編「XP大好き！」</a></li>
+                <li><span class="marker-circle">③</span><a href="novel/novel03.html">SS「エロ柱」</a></li>
+                </ul>
+            </section>
+            <section id="members-section">
+                <h2>参加メンバー</h2>
+                <ul class="member-list">
+                    <!-- TODO：リンク先を・/corosuke/A-01aにしてその中にバナー？ -->
+                <li>
+                    <div class="member-name">
+                        corosuke<span class="space">西4ホール A-01a</span>
+                    </div>
+                    <a href="https://x.com/coro_raynes" target="_blank" rel="noopener" class="member-banner-link">
+                        <img src="img/member-banner.png" alt="（バナー想定）corosuke Twitterへ">
+                    </a>
+                </li>
+                <li>
+                    <div class="member-name">
+                        ついてない <span class="space">東1ホール B-12b</span>
+                    </div>
+                    <a href="https://x.com/tuitenainannte" target="_blank" rel="noopener" class="member-banner-link">
+                        <img src="img/member-banner.png" alt="（バナー想定）ついてない Twitterへ">
+                    </a>
+                </li>
+                <!-- 上記を繰り返す。　TODO 別ファイルとかに管理して読み込めるかな？CSVとかそういうので名前　ツイッター　場所　とか  -->
+                </ul>
+            </section>
+        </main>
+    </div>
+    <script src="js/main.js"></script>
+</body>
+</html>
