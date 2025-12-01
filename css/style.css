@@ -118,6 +118,9 @@ section h2 {
     list-style: none;
     padding-left: 0;
 }
+.hidden-item {
+    display: none;
+}
 .illust-list li,
 .novel-list li {
     margin-bottom: 6px;
@@ -151,6 +154,14 @@ section h2 {
     margin-top: 4px;
     max-width: 180px;
     border: 1px solid #444466;
+}
+.show-more {
+    margin-top: 8px;
+    padding: 6px 12px;
+    background: #111122;
+    color: #ffcc66;
+    border: 1px solid #444466;
+    cursor: url("../cursors/link.cur"), pointer;
 }
 
 /* MIDI Button */
