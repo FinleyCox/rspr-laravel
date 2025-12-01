@@ -15,31 +15,52 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        const bumpLocal = () => {
-            let count = parseInt(localStorage.getItem("visitCount") || "0", 10);
-            count += 1;
-            localStorage.setItem("visitCount", String(count));
-            renderDigits(count);
+        const loadNumber = (key, fallback = 0) =>
+            parseInt(localStorage.getItem(key) || String(fallback), 10);
+        const saveNumber = (key, value) => localStorage.setItem(key, String(value));
+
+        const namespace = "rspr-home";
+        const counterKey = "visits";
+        const endpoints = [
+            `https://api.countapi.xyz/update/${namespace}/${counterKey}/?amount=`,
+            `https://api.countapi.dev/update/${namespace}/${counterKey}/?amount=`,
+        ];
+
+        const addPending = (n) => {
+            const pending = loadNumber("pendingHits", 0) + n;
+            saveNumber("pendingHits", pending);
+            return pending;
         };
 
-        const bumpGlobal = async () => {
-            const namespace = "rspr-home";
-            const key = "visits";
-            const url = `https://api.countapi.xyz/hit/${namespace}/${key}`;
+        const bumpWithSync = async () => {
+            // まず「今回の1回」をpendingに加えておく（失敗時も保持される）
+            addPending(1);
+            const pending = loadNumber("pendingHits", 0);
+            const cachedGlobal = loadNumber("lastGlobalCount", 0);
 
-            try {
-                const res = await fetch(url);
-                if (!res.ok) throw new Error(`CountAPI status ${res.status}`);
-                const data = await res.json();
-                if (!data || typeof data.value !== "number") throw new Error("CountAPI invalid payload");
-                renderDigits(data.value);
-            } catch (error) {
-                console.error("Global counter failed, fallback to localStorage", error);
-                bumpLocal();
+            // エンドポイントを順に試す（adblock/ドメインブロック対策）
+            for (const baseUrl of endpoints) {
+                try {
+                    const res = await fetch(`${baseUrl}${pending}`, { cache: "no-store" });
+                    if (!res.ok) throw new Error(`CountAPI status ${res.status}`);
+                    const data = await res.json();
+                    if (!data || typeof data.value !== "number") throw new Error("CountAPI invalid payload");
+
+                    saveNumber("pendingHits", 0);
+                    saveNumber("lastGlobalCount", data.value);
+                    renderDigits(data.value);
+                    return;
+                } catch (error) {
+                    console.error(`Global counter failed at ${baseUrl}`, error);
+                }
             }
+
+            // 全て失敗: キャッシュ＋pendingで暫定表示
+            const fallbackCount = cachedGlobal + pending;
+            renderDigits(fallbackCount);
         };
 
-        bumpGlobal();
+        bumpWithSync();
     }
 
   /* ===== MIDI ===== */
