@@ -19,8 +19,13 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         };
 
-        const initialCount = Number(digitsContainer.dataset.count ?? digitsContainer.textContent ?? 0);
-        renderDigits(Number.isFinite(initialCount) ? initialCount : 0);
+        const parseCount = (value) => {
+            const num = Number.parseInt(String(value ?? "0").replace(/[^0-9]/g, ""), 10);
+            return Number.isFinite(num) ? num : 0;
+        };
+
+        const initialCount = digitsContainer.dataset.count ?? digitsContainer.textContent ?? 0;
+        renderDigits(parseCount(initialCount));
     }
 
   /* ===== MIDI ===== */
