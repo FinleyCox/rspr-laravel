@@ -33,8 +33,9 @@
                     id="counter-digits"
                     data-count="{{ $visitCount }}"
                     data-digits-base="{{ asset('digits') }}"
+                    data-pad="5"
                 >
-                    {{ number_format($visitCount) }}
+                    {{ $visitCount }}
                 </span>
                 人目の訪問者です。
             </div>
