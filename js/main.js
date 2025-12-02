@@ -1,10 +1,9 @@
 document.addEventListener("DOMContentLoaded", () => {
-//  TODO：数字の画像？が必要かも
   /* ===== カウンター ===== */
     const digitsContainer = document.getElementById("counter-digits");
     if (digitsContainer) {
         const renderDigits = (count) => {
-            const digits = String(count).padStart(3, "0"); // 3桁（001〜）
+            const digits = String(count).padStart(5, "0"); 
             digitsContainer.innerHTML = "";
             for (const d of digits) {
                 const img = document.createElement("img");

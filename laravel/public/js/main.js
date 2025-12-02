@@ -1,66 +1,26 @@
 document.addEventListener("DOMContentLoaded", () => {
-//  TODO：数字の画像？が必要かも
   /* ===== カウンター ===== */
     const digitsContainer = document.getElementById("counter-digits");
     if (digitsContainer) {
+        const digitsBase = digitsContainer.dataset.digitsBase || "/digits";
+        const digitPad = Number.parseInt(digitsContainer.dataset.pad ?? "5", 10);
+
         const renderDigits = (count) => {
-            const digits = String(count).padStart(3, "0"); // 3桁（001〜）
+            const safeCount = Number.isFinite(count) ? count : 0;
+            const padLength = Number.isFinite(digitPad) ? digitPad : 5;
+            const digits = String(safeCount).padStart(Math.max(padLength, String(safeCount).length), "0");
             digitsContainer.innerHTML = "";
             for (const d of digits) {
                 const img = document.createElement("img");
-                img.src = `digits/${d}.svg`;
+                img.src = `${digitsBase}/${d}.svg`;
                 img.alt = d;
                 img.className = "counter-digit";
                 digitsContainer.appendChild(img);
             }
         };
 
-        const loadNumber = (key, fallback = 0) =>
-            parseInt(localStorage.getItem(key) || String(fallback), 10);
-        const saveNumber = (key, value) => localStorage.setItem(key, String(value));
-
-        const namespace = "rspr-home";
-        const counterKey = "visits";
-        const endpoints = [
-            `https://api.countapi.xyz/update/${namespace}/${counterKey}/?amount=`,
-            `https://api.countapi.dev/update/${namespace}/${counterKey}/?amount=`,
-        ];
-
-        const addPending = (n) => {
-            const pending = loadNumber("pendingHits", 0) + n;
-            saveNumber("pendingHits", pending);
-            return pending;
-        };
-
-        const bumpWithSync = async () => {
-            // まず「今回の1回」をpendingに加えておく（失敗時も保持される）
-            addPending(1);
-            const pending = loadNumber("pendingHits", 0);
-            const cachedGlobal = loadNumber("lastGlobalCount", 0);
-
-            // エンドポイントを順に試す（adblock/ドメインブロック対策）
-            for (const baseUrl of endpoints) {
-                try {
-                    const res = await fetch(`${baseUrl}${pending}`, { cache: "no-store" });
-                    if (!res.ok) throw new Error(`CountAPI status ${res.status}`);
-                    const data = await res.json();
-                    if (!data || typeof data.value !== "number") throw new Error("CountAPI invalid payload");
-
-                    saveNumber("pendingHits", 0);
-                    saveNumber("lastGlobalCount", data.value);
-                    renderDigits(data.value);
-                    return;
-                } catch (error) {
-                    console.error(`Global counter failed at ${baseUrl}`, error);
-                }
-            }
-
-            // 全て失敗: キャッシュ＋pendingで暫定表示
-            const fallbackCount = cachedGlobal + pending;
-            renderDigits(fallbackCount);
-        };
-
-        bumpWithSync();
+        const initialCount = Number(digitsContainer.dataset.count ?? digitsContainer.textContent ?? 0);
+        renderDigits(Number.isFinite(initialCount) ? initialCount : 0);
     }
 
   /* ===== MIDI ===== */

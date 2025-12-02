@@ -1,10 +1,19 @@
 <?php
 
+use App\Services\VisitCounter;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'entrance')->name('entrance');
+Route::get('/', function (VisitCounter $counter) {
+    $counter->increment();
 
-Route::view('/home', 'home')->name('home');
+    return view('entrance');
+})->name('entrance');
+
+Route::get('/home', function (VisitCounter $counter) {
+    return view('home', [
+        'visitCount' => $counter->current(),
+    ]);
+})->name('home');
 
 Route::prefix('members')->group(function () {
     Route::view('/beeskneeswanker/A-01a', 'members.beeskneeswanker.A-01a')
