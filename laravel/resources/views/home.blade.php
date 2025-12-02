@@ -4,6 +4,9 @@
 @section('body_class', 'home')
 
 @section('content')
+@php
+    $visitCount = $visitCount ?? 0;
+@endphp
 <div class="midi-player">
     <button id="midi-toggle">♪ BGM ON</button>
     <audio id="bgm" loop>
@@ -25,7 +28,15 @@
         <div class="counter-box">
             <div>COUNTER</div>
             <div id="counter">
-                あなたは <span id="counter-digits"></span> 人目の訪問者です。
+                あなたは
+                <span
+                    id="counter-digits"
+                    data-count="{{ $visitCount }}"
+                    data-digits-base="{{ asset('digits') }}"
+                >
+                    {{ number_format($visitCount) }}
+                </span>
+                人目の訪問者です。
             </div>
         </div>
     </aside>
