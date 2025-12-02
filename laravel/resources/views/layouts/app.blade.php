@@ -9,6 +9,9 @@
 </head>
 <body class="@yield('body_class', '')">
     @yield('content')
-    <script src="{{ asset('js/main.js') }}"></script>
+    @php
+        $mainJsVersion = @filemtime(public_path('js/main.js')) ?: time();
+    @endphp
+    <script src="{{ asset('js/main.js') . '?v=' . $mainJsVersion }}"></script>
 </body>
 </html>
