@@ -25,6 +25,8 @@
 @endphp
 
 <div class="member-profile">
+    {{-- todo:できれば名前とか自動にしたい テーブル作るかな --}}
+    <h4 class="member-name">スラブのページ</h4>
     @if (count($illusts) > 0)
     <section>
         <h2>イラスト</h2>
