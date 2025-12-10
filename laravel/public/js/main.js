@@ -92,4 +92,29 @@ document.addEventListener("DOMContentLoaded", () => {
     setupShowMore("#illust-list");
     setupShowMore("#novel-list");
     setupShowMore("#member-list");
+
+  /* ===== Popup Image (member page) ===== */
+    const modal = document.getElementById("image-modal");
+    if (modal) {
+        const backdrop = modal.querySelector(".image-modal__backdrop");
+        const closeBtn = modal.querySelector(".image-modal__close");
+        const img = modal.querySelector("img");
+
+        const hide = () => {
+            modal.classList.remove("is-open");
+        };
+
+        const show = (src) => {
+            if (!src || !img) return;
+            img.src = src;
+            modal.classList.add("is-open");
+        };
+
+        if (modal.dataset.show === "1" && modal.dataset.image) {
+            show(modal.dataset.image);
+        }
+
+        backdrop?.addEventListener("click", hide);
+        closeBtn?.addEventListener("click", hide);
+    }
 });
