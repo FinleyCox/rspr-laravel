@@ -9,15 +9,16 @@
         [
             'slug' => 'illust01',
             'title' => 'リゾプロエロ',
+            'image' => asset('img/members/beeskneeswanker/beeskneeswanker_0.jpg'),
+        ],
+        [
+            'slug' => 'illust02',
+            'title' => '手コキ',
             'image' => asset('img/members/beeskneeswanker/beeskneeswanker_1.jpg'),
         ],
     ];
     $novels = [
-        [
-            'slug' => 'novel02',
-            'title' => '中編「XP大好き！」',
-            'link' => url('novel/novel02.html'),
-        ],
+
     ];
     $popupKey = request('popup');
     $popupImage = collect($illusts)->firstWhere('slug', $popupKey)['image'] ?? null;

@@ -93,7 +93,7 @@ document.addEventListener("DOMContentLoaded", () => {
     setupShowMore("#novel-list");
     setupShowMore("#member-list");
 
-  /* ===== Popup Image (member page) ===== */
+  /* ===== 画像ポップアップ ===== */
     const modal = document.getElementById("image-modal");
     if (modal) {
         const backdrop = modal.querySelector(".image-modal__backdrop");
@@ -141,4 +141,15 @@ document.addEventListener("DOMContentLoaded", () => {
         backdrop?.addEventListener("click", hide);
         closeBtn?.addEventListener("click", hide);
     }
+
+  /* ===== コピーとか画像保存防止 ===== */
+    document.addEventListener("contextmenu", (event) => {
+        event.preventDefault();
+    });
+    document.addEventListener("copy", (event) => {
+        event.preventDefault();
+    });
+    document.addEventListener("dragstart", (event) => {
+        event.preventDefault();
+    });
 });

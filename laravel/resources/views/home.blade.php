@@ -47,7 +47,7 @@
             <h2>イラスト置き場</h2>
             <ul class="illust-list" id="illust-list">
                 <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust01']) }}">リゾプロエロ</a></li>
-                <li><span class="marker-square">■</span><a href="illust/illust02.html">手コキ</a></li>
+                <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust02']) }}">手コキ</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">女体化</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">a</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">b</a></li>

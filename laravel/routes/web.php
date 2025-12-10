@@ -16,6 +16,7 @@ Route::get('/home', function (VisitCounter $counter) {
 })->name('home');
 
 Route::prefix('members')->group(function () {
+    Route::view('/gate', 'members.gate')->name('members.gate');
     Route::view('/beeskneeswanker', 'members.beeskneeswanker')
         ->name('members.beeskneeswanker');
 });

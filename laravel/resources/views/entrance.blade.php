@@ -17,4 +17,7 @@
         entri
     </button>
 </div>
+    <a href="{{ route('members.gate') }}" style="color: #ffffff; text-decoration: none;">
+        裏サイト
+    </a>
 @endsection
