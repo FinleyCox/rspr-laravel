@@ -181,6 +181,70 @@ section h2 {
     color: #000000;
 }
 
+/* ===== Member Page ===== */
+.member-profile {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 24px 16px;
+}
+.member-hero__banner {
+    width: 100%;
+    border: 2px solid #5aa68a;
+    background: #5aa68a;
+    display: block;
+    margin-bottom: 16px;
+}
+.member-hero__thumbs {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+.member-hero__thumbs img {
+    width: calc(33% - 8px);
+    min-width: 180px;
+    border: 2px solid #000000;
+}
+.image-modal {
+    position: fixed;
+    inset: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.image-modal.is-open {
+    display: flex;
+}
+.image-modal__backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+}
+.image-modal__content {
+    position: relative;
+    background: #ffffff;
+    border: 2px solid #000000;
+    padding: 12px;
+    max-width: 90vw;
+    max-height: 90vh;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+.image-modal__content img {
+    max-width: 80vw;
+    max-height: 80vh;
+    display: block;
+}
+.image-modal__close {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    background: #ffffff;
+    border: 1px solid #000000;
+    font-size: 1rem;
+    cursor: pointer;
+}
+
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
 .layout {
@@ -190,5 +254,11 @@ section h2 {
     width: 100%;
     border-right: none;
     border-bottom: 2px solid #000000;
+}
+.member-hero__thumbs {
+    flex-direction: column;
+}
+.member-hero__thumbs img {
+    width: 100%;
 }
 }

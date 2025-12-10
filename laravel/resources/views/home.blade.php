@@ -46,7 +46,7 @@
         <section id="illust-section">
             <h2>イラスト置き場</h2>
             <ul class="illust-list" id="illust-list">
-                <li><span class="marker-square">■</span><a href="illust/illust01.html">リゾプロエロ</a></li>
+                <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust01']) }}">リゾプロエロ</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust02.html">手コキ</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">女体化</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">a</a></li>
@@ -76,7 +76,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('members.beeskneeswanker) }}" target="_blank" rel="noopener" class="member-banner-link">
+                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
                         <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
                     </a>
                 </li>
