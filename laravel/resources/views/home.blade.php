@@ -49,6 +49,9 @@
                 <li><span class="marker-square">■</span><a href="illust/illust01.html">リゾプロエロ</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust02.html">手コキ</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">女体化</a></li>
+                <li><span class="marker-square">■</span><a href="illust/illust03.html">a</a></li>
+                <li><span class="marker-square">■</span><a href="illust/illust03.html">b</a></li>
+                <li><span class="marker-square">■</span><a href="illust/illust03.html">c</a></li>
             </ul>
             <button class="show-more" data-target="#illust-list" aria-expanded="false" type="button">もっと見る</button>
         </section>
@@ -58,6 +61,9 @@
                 <li><span class="marker-circle">①</span><a href="novel/novel01.html">短編「リゾプロ最高ー！」</a></li>
                 <li><span class="marker-circle">②</span><a href="novel/novel02.html">中編「XP大好き！」</a></li>
                 <li><span class="marker-circle">③</span><a href="novel/novel03.html">SS「エロ柱」</a></li>
+                <li><span class="marker-circle">③</span><a href="novel/novel03.html">a</a></li>
+                <li><span class="marker-circle">③</span><a href="novel/novel03.html">b</a></li>
+                <li><span class="marker-circle">③</span><a href="novel/novel03.html">c</a></li>
             </ul>
             <button class="show-more" data-target="#novel-list" aria-expanded="false" type="button">もっと見る</button>
         </section>
@@ -65,7 +71,17 @@
             <h2>参加メンバー</h2>
             <ul class="member-list" id="member-list">
                 <li>
-                    <a href="{{ route('members.beeskneeswanker.a01a') }}" target="_blank" rel="noopener" class="member-banner-link">
+                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
+                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('members.beeskneeswanker) }}" target="_blank" rel="noopener" class="member-banner-link">
+                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
                         <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
                     </a>
                 </li>
@@ -75,22 +91,12 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('members.beeskneeswanker.a01a') }}" target="_blank" rel="noopener" class="member-banner-link">
+                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
                         <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('members.beeskneeswanker.a01a') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker.a01a') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker.a01a') }}" target="_blank" rel="noopener" class="member-banner-link">
+                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
                         <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
                     </a>
                 </li>
