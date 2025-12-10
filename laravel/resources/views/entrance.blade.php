@@ -14,7 +14,7 @@
         閲覧に問題のない方のみお進みください。
     </p>
     <button onclick="location.href='{{ route('home') }}'" class="enter-button">
-        入る
+        entri
     </button>
 </div>
 @endsection
