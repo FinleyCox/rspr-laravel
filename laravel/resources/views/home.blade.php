@@ -86,7 +86,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="{{ route('members.beeskneeswanker.a01a') }}" target="_blank" rel="noopener" class="member-banner-link">
+                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
                         <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
                     </a>
                 </li>
