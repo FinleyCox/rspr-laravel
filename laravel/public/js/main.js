@@ -99,9 +99,13 @@ document.addEventListener("DOMContentLoaded", () => {
         const backdrop = modal.querySelector(".image-modal__backdrop");
         const closeBtn = modal.querySelector(".image-modal__close");
         const img = modal.querySelector("img");
+        const links = document.querySelectorAll("[data-popup-image][data-popup-slug]");
 
         const hide = () => {
             modal.classList.remove("is-open");
+            const url = new URL(window.location.href);
+            url.searchParams.delete("popup");
+            window.history.replaceState({}, "", url);
         };
 
         const show = (src) => {
@@ -109,6 +113,26 @@ document.addEventListener("DOMContentLoaded", () => {
             img.src = src;
             modal.classList.add("is-open");
         };
+
+        const openFromLink = (linkEl) => {
+            const image = linkEl.dataset.popupImage;
+            const slug = linkEl.dataset.popupSlug;
+            if (!image) return;
+            show(image);
+
+            if (slug) {
+                const url = new URL(window.location.href);
+                url.searchParams.set("popup", slug);
+                window.history.replaceState({}, "", url);
+            }
+        };
+
+        links.forEach((link) => {
+            link.addEventListener("click", (event) => {
+                event.preventDefault();
+                openFromLink(link);
+            });
+        });
 
         if (modal.dataset.show === "1" && modal.dataset.image) {
             show(modal.dataset.image);

@@ -9,7 +9,6 @@
         [
             'slug' => 'illust01',
             'title' => 'リゾプロエロ',
-            'link' => url('illust/illust01.html'),
             'image' => asset('img/members/beeskneeswanker/beeskneeswanker_1.jpg'),
         ],
     ];
@@ -25,15 +24,6 @@
 @endphp
 
 <div class="member-profile">
-    <div class="member-hero">
-        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="beeskneeswanker banner" class="member-hero__banner">
-        <div class="member-hero__thumbs">
-            <img src="{{ asset('img/members/beeskneeswanker/beeskneeswanker_1.jpg') }}" alt="beeskneeswanker illustration 1">
-            <img src="{{ asset('img/members/beeskneeswanker/beeskneeswanker_2.jpg') }}" alt="beeskneeswanker illustration 2">
-            <img src="{{ asset('img/members/beeskneeswanker/beeskneeswanker_3.jpg') }}" alt="beeskneeswanker illustration 3">
-        </div>
-    </div>
-
     @if (count($illusts) > 0)
     <section>
         <h2>イラスト</h2>
@@ -41,7 +31,13 @@
             @foreach ($illusts as $illust)
                 <li>
                     <span class="marker-square">■</span>
-                    <a href="{{ $illust['link'] }}">{{ $illust['title'] }}</a>
+                    <a
+                        href="{{ route('members.beeskneeswanker', ['popup' => $illust['slug']]) }}"
+                        data-popup-image="{{ $illust['image'] }}"
+                        data-popup-slug="{{ $illust['slug'] }}"
+                    >
+                        {{ $illust['title'] }}
+                    </a>
                 </li>
             @endforeach
         </ul>
