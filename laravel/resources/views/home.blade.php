@@ -43,67 +43,48 @@
     </aside>
     <!-- 真ん中 -->
     <main class="content">
+        @php
+            $categoryList = $categories ?? collect();
+            $illustCategories = $categoryList->where('type', '0');
+            $novelCategories = $categoryList->where('type', '1');
+        @endphp
         <section id="illust-section">
             <h2>イラスト置き場</h2>
             <ul class="illust-list" id="illust-list">
-                {{-- <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust01']) }}">リゾプロ1</a></li>
-                <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust02']) }}">リゾプロ2</a></li> --}}
-                {{-- カテゴリページへの導線 --}}
-                <li><span class="marker-square">■</span><a href="{{ route('categories.category1') }}">カテゴリ1</a></li>
-                <li><span class="marker-square">■</span><a href="{{ route('categories.category2') }}">カテゴリ2</a></li>
-                <li><span class="marker-square">■</span><a href="illust/illust03.html">リゾプロ3</a></li>
-                <li><span class="marker-square">■</span><a href="illust/illust03.html">a</a></li>
-                <li><span class="marker-square">■</span><a href="illust/illust03.html">b</a></li>
-                <li><span class="marker-square">■</span><a href="illust/illust03.html">c</a></li>
+                {{-- カテゴリはDBから表示 --}}
+                @forelse ($illustCategories as $category)
+                    <li><span class="marker-square">■</span><a href="{{ route('categories.show', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
+                @empty
+                    <li>カテゴリがありません。</li>
+                @endforelse
             </ul>
-            <button class="show-more" data-target="#illust-list" aria-expanded="false" type="button">もっと見る</button>
         </section>
         <section id="novel-section">
             <h2>小説置き場</h2>
             <ul class="novel-list" id="novel-list">
-                <li><span class="marker-circle">①</span><a href="novel/novel01.html">短編</a></li>
-                <li><span class="marker-circle">②</span><a href="novel/novel02.html">中編</a></li>
-                <li><span class="marker-circle">③</span><a href="novel/novel03.html">SS</a></li>
-                <li><span class="marker-circle">③</span><a href="novel/novel03.html">a</a></li>
-                <li><span class="marker-circle">③</span><a href="novel/novel03.html">b</a></li>
-                <li><span class="marker-circle">③</span><a href="novel/novel03.html">c</a></li>
+                @forelse ($novelCategories as $category)
+                    <li><span class="marker-circle">①</span><a href="{{ route('categories.show', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
+                @empty
+                    <li>カテゴリがありません。</li>
+                @endforelse
             </ul>
-            <button class="show-more" data-target="#novel-list" aria-expanded="false" type="button">もっと見る</button>
         </section>
         <section id="members-section">
             <h2>参加メンバー</h2>
             <ul class="member-list" id="member-list">
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <!-- TODO: データ化して繰り返し生成する -->
+                @forelse ($members ?? [] as $member)
+                    <li>
+                        <a href="{{ route('members.show', ['slug' => $member->slug]) }}" target="_blank" rel="noopener" class="member-banner-link">
+                            @if ($member->banner_path)
+                                <img src="{{ asset($member->banner_path) }}" alt="（バナー）{{ $member->display_name }}紹介ページへ">
+                            @else
+                                {{ $member->display_name }}
+                            @endif
+                        </a>
+                    </li>
+                @empty
+                    <li>メンバー情報がありません。</li>
+                @endforelse
             </ul>
             <button class="show-more" data-target="#member-list" aria-expanded="false" type="button">もっと見る</button>
         </section>
