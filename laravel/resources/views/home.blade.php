@@ -76,7 +76,7 @@
                     <li>
                         <a href="{{ route('members.show', ['slug' => $member->slug]) }}" target="_blank" rel="noopener" class="member-banner-link">
                             @if ($member->banner_path)
-                                <img src="{{ asset($member->banner_path) }}" alt="（バナー）{{ $member->display_name }}紹介ページへ">
+                                <img src="{{ asset($member->banner_path) }}" alt="（バナー）{{ $member->display_name }}作品ページへ">
                             @else
                                 {{ $member->display_name }}
                             @endif
