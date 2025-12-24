@@ -63,7 +63,14 @@ Route::prefix('members')->group(function () {
     Route::view('/gate', 'members.gate')->name('members.gate');
     Route::get('/{slug}', function (string $slug) {
         $member = Member::where('slug', $slug)->firstOrFail();
-        $works = Work::where('member_id', $member->id)->get();
+        $works = Work::where('member_id', $member->id)
+            // 個人ページではバナー画像を作品一覧に含めない
+            ->when($member->banner_path, function ($query) use ($member) {
+                $query->where('asset_path', '!=', $member->banner_path);
+            })
+            ->get();
+        $illustWorks = $works->where('type', '0');
+        $novelWorks = $works->where('type', '1');
         $popupImage = null;
         $popupSlug = request('popup');
         if ($popupSlug) {
@@ -72,6 +79,8 @@ Route::prefix('members')->group(function () {
         return view('members.show', [
             'member' => $member,
             'works' => $works,
+            'illustWorks' => $illustWorks,
+            'novelWorks' => $novelWorks,
             'popupImage' => $popupImage ? asset($popupImage) : null,
         ]);
     })->name('members.show');
