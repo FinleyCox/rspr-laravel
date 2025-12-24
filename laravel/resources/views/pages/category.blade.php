@@ -26,20 +26,20 @@
                 @forelse ($members as $member)
                     <li class="member-card">
                         <div class="member-card__header">
-                            <span class="marker-square">■</span>
+                            <span class="marker-square">⇨</span>
                             <a href="{{ route('members.show', ['slug' => $member->slug]) }}" target="_blank" rel="noopener">
                                 {{ $member->display_name }}のページへ
                             </a>
                         </div>
                         <ul class="member-card__works">
                             @foreach ($member->works as $work)
-                                @php
+                                {{-- @php
                                     $isNovel = (string)$work->type === '1';
                                     $markerClass = $isNovel ? 'marker-circle' : 'marker-square';
                                     $markerSymbol = $isNovel ? '◻︎' : '■';
-                                @endphp
+                                @endphp --}}
                                 <li>
-                                    <span class="{{ $markerClass }}">{{ $markerSymbol }}</span>
+                                    {{-- <span class="{{ $markerClass }}">{{ $markerSymbol }}</span> --}}
                                     <a
                                         href="{{ route('categories.show', ['slug' => $category->slug, 'popup' => $work->slug]) }}"
                                         data-popup-image="{{ asset($work->asset_path) }}"
