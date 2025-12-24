@@ -39,6 +39,7 @@
                                 @endphp
                                 <li>
                                     <span class="{{ $markerClass }}">{{ $markerSymbol }}</span>
+                                    {{-- TODO: 作品詳細ページが出来たら route(...) へ差し替え --}}
                                     <a href="{{ asset($work->asset_path) }}" target="_blank" rel="noopener">
                                         {{ $work->title }}
                                     </a>
