@@ -3,6 +3,7 @@
 use App\Services\VisitCounter;
 use App\Models\Category;
 use App\Models\Member;
+use App\Models\Work;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\Facades\Route;
 
@@ -14,9 +15,11 @@ Route::get('/', function (VisitCounter $counter) {
 
 Route::get('/home', function (VisitCounter $counter) {
     $categories = Category::orderBy('id')->get();
+    $members = Member::orderBy('id')->get();
     return view('home', [
         'visitCount' => $counter->current(),
         'categories' => $categories,
+        'members' => $members,
     ]);
 })->name('home');
 
@@ -30,22 +33,38 @@ Route::prefix('categories')->group(function () {
         }])->whereHas('works', function ($query) use ($categoryId) {
             $query->where('category_id', $categoryId);
         })->get();
+        // popup用にslug一致の画像を特定
+        $popupSlug = request('popup');
+        $popupImage = null;
+        if ($popupSlug) {
+            $popupImage = $members
+                ->flatMap->works
+                ->firstWhere('slug', $popupSlug)?->asset_path;
+        }
 
         return view('pages.category', [
             'visitCount' => $counter->current(),
             'category' => $category,
             'members' => $members,
+            'popupImage' => $popupImage ? asset($popupImage) : null,
         ]);
     })->name('categories.show');
 });
 
 Route::prefix('members')->group(function () {
     Route::view('/gate', 'members.gate')->name('members.gate');
-    Route::view('/beeskneeswanker', 'members.beeskneeswanker')
-        ->name('members.beeskneeswanker');
     Route::get('/{slug}', function (string $slug) {
-        $viewName = "members.{$slug}";
-        abort_unless(View::exists($viewName), 404);
-        return view($viewName);
+        $member = Member::where('slug', $slug)->firstOrFail();
+        $works = Work::where('member_id', $member->id)->get();
+        $popupImage = null;
+        $popupSlug = request('popup');
+        if ($popupSlug) {
+            $popupImage = $works->firstWhere('slug', $popupSlug)?->asset_path;
+        }
+        return view('members.show', [
+            'member' => $member,
+            'works' => $works,
+            'popupImage' => $popupImage ? asset($popupImage) : null,
+        ]);
     })->name('members.show');
 });

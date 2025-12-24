@@ -8,6 +8,7 @@
     $visitCount = $visitCount ?? 0;
     $categoryName = $category->name ?? 'カテゴリ';
     $categoryType = (string)($category->type ?? '0');
+    $popupImage = $popupImage ?? null;
 @endphp
 <div class="midi-player">
     <button id="midi-toggle">♪ BGM ON</button>
@@ -39,8 +40,11 @@
                                 @endphp
                                 <li>
                                     <span class="{{ $markerClass }}">{{ $markerSymbol }}</span>
-                                    {{-- TODO: 作品詳細ページが出来たら route(...) へ差し替え --}}
-                                    <a href="{{ asset($work->asset_path) }}" target="_blank" rel="noopener">
+                                    <a
+                                        href="{{ route('categories.show', ['slug' => $category->slug, 'popup' => $work->slug]) }}"
+                                        data-popup-image="{{ asset($work->asset_path) }}"
+                                        data-popup-slug="{{ $work->slug }}"
+                                    >
                                         {{ $work->title }}
                                     </a>
                                 </li>
@@ -53,5 +57,12 @@
             </ul>
         </section>
     </main>
+</div>
+<div id="image-modal" class="image-modal" data-show="{{ $popupImage ? '1' : '0' }}" data-image="{{ $popupImage }}">
+    <div class="image-modal__backdrop"></div>
+    <div class="image-modal__content">
+        <button class="image-modal__close" type="button">×</button>
+        <img src="{{ $popupImage ?? '' }}" alt="作品画像">
+    </div>
 </div>
 @endsection

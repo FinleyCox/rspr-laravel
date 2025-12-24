@@ -72,37 +72,19 @@
         <section id="members-section">
             <h2>参加メンバー</h2>
             <ul class="member-list" id="member-list">
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <li>
-                    <a href="{{ route('members.beeskneeswanker') }}" target="_blank" rel="noopener" class="member-banner-link">
-                        <img src="{{ asset('img/members/beeskneeswanker/banner.svg') }}" alt="（バナー）スラブ紹介ページへ">
-                    </a>
-                </li>
-                <!-- TODO: データ化して繰り返し生成する -->
+                @forelse ($members ?? [] as $member)
+                    <li>
+                        <a href="{{ route('members.show', ['slug' => $member->slug]) }}" target="_blank" rel="noopener" class="member-banner-link">
+                            @if ($member->banner_path)
+                                <img src="{{ asset($member->banner_path) }}" alt="（バナー）{{ $member->display_name }}紹介ページへ">
+                            @else
+                                {{ $member->display_name }}
+                            @endif
+                        </a>
+                    </li>
+                @empty
+                    <li>メンバー情報がありません。</li>
+                @endforelse
             </ul>
             <button class="show-more" data-target="#member-list" aria-expanded="false" type="button">もっと見る</button>
         </section>
