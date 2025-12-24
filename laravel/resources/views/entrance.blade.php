@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'rspr')
+@section('title', 'リゾプロ - Entrance')
 @section('body_class', 'entrance')
 
 @section('content')

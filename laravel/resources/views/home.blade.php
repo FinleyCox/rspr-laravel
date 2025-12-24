@@ -46,9 +46,12 @@
         <section id="illust-section">
             <h2>イラスト置き場</h2>
             <ul class="illust-list" id="illust-list">
-                <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust01']) }}">リゾプロエロ</a></li>
-                <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust02']) }}">手コキ</a></li>
-                <li><span class="marker-square">■</span><a href="illust/illust03.html">女体化</a></li>
+                {{-- <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust01']) }}">リゾプロ1</a></li>
+                <li><span class="marker-square">■</span><a href="{{ route('members.beeskneeswanker', ['popup' => 'illust02']) }}">リゾプロ2</a></li> --}}
+                {{-- カテゴリページへの導線 --}}
+                <li><span class="marker-square">■</span><a href="{{ route('categories.category1') }}">カテゴリ1</a></li>
+                <li><span class="marker-square">■</span><a href="{{ route('categories.category2') }}">カテゴリ2</a></li>
+                <li><span class="marker-square">■</span><a href="illust/illust03.html">リゾプロ3</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">a</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">b</a></li>
                 <li><span class="marker-square">■</span><a href="illust/illust03.html">c</a></li>
@@ -58,9 +61,9 @@
         <section id="novel-section">
             <h2>小説置き場</h2>
             <ul class="novel-list" id="novel-list">
-                <li><span class="marker-circle">①</span><a href="novel/novel01.html">短編「リゾプロ最高ー！」</a></li>
-                <li><span class="marker-circle">②</span><a href="novel/novel02.html">中編「XP大好き！」</a></li>
-                <li><span class="marker-circle">③</span><a href="novel/novel03.html">SS「エロ柱」</a></li>
+                <li><span class="marker-circle">①</span><a href="novel/novel01.html">短編</a></li>
+                <li><span class="marker-circle">②</span><a href="novel/novel02.html">中編</a></li>
+                <li><span class="marker-circle">③</span><a href="novel/novel03.html">SS</a></li>
                 <li><span class="marker-circle">③</span><a href="novel/novel03.html">a</a></li>
                 <li><span class="marker-circle">③</span><a href="novel/novel03.html">b</a></li>
                 <li><span class="marker-circle">③</span><a href="novel/novel03.html">c</a></li>
