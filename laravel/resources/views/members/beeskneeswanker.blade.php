@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'beeskneeswanker')
+@section('title', 'リゾプロ - スラブのページ')
 @section('body_class', 'member-page')
 
 @section('content')
@@ -8,12 +8,12 @@
     $illusts = [
         [
             'slug' => 'illust01',
-            'title' => 'リゾプロエロ',
+            'title' => 'リゾプロ1',
             'image' => asset('img/members/beeskneeswanker/beeskneeswanker_0.jpg'),
         ],
         [
             'slug' => 'illust02',
-            'title' => '手コキ',
+            'title' => 'リゾプロ2',
             'image' => asset('img/members/beeskneeswanker/beeskneeswanker_1.jpg'),
         ],
     ];
