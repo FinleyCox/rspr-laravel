@@ -63,7 +63,7 @@
             <h2>小説置き場</h2>
             <ul class="novel-list" id="novel-list">
                 @forelse ($novelCategories as $category)
-                    <li><span class="marker-circle">①</span><a href="{{ route('categories.show', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
+                    <li><span class="marker-circle">◻︎</span><a href="{{ route('categories.show', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
                 @empty
                     <li>カテゴリがありません。</li>
                 @endforelse

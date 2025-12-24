@@ -20,7 +20,7 @@
                 @php
                     $isNovel = (string)$work->type === '1';
                     $markerClass = $isNovel ? 'marker-circle' : 'marker-square';
-                    $markerSymbol = $isNovel ? '①' : '■';
+                    $markerSymbol = $isNovel ? '◻︎' : '■';
                 @endphp
                 <li>
                     <span class="{{ $markerClass }}">{{ $markerSymbol }}</span>
