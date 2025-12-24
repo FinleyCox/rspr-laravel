@@ -111,7 +111,8 @@ class ImportMembers extends Command
                             continue;
                         }
                         $fileBase = $image->getFilenameWithoutExtension();
-                        $workSlug = Str::slug("{$slug}-{$fileBase}");
+                        // 命名規則: ユーザー名(slug)_番号_タイトル名（例: beeskneeswanker_0_xxxx）
+                        [$workSlug, $workTitle] = $this->parseWorkFilename($fileBase, $slug);
                         $assetPath = "img/members/{$slug}/" . $image->getFilename();
                         $workType = '0'; // 0=illustration, 1=novel
                         DB::table('works')->upsert(
@@ -119,7 +120,7 @@ class ImportMembers extends Command
                                 'slug' => $workSlug,
                                 'member_id' => $memberId,
                                 'category_id' => $categoryId, // CSVで指定があれば上書き
-                                'title' => $fileBase,
+                                'title' => $workTitle,
                                 'type' => $workType,
                                 'asset_path' => $assetPath,
                                 'summary' => null,
@@ -172,5 +173,20 @@ class ImportMembers extends Command
         }
         File::move($targetFile, $donePath);
         return $donePath;
+    }
+
+    private function parseWorkFilename(string $fileBase, string $memberSlug): array
+    {
+        // 期待形式: {memberSlug}_{number}_{titlePart}
+        if (preg_match('/^(.+?)_(\\d+?)_(.+)$/u', $fileBase, $m)) {
+            $number = $m[2];
+            $title = $m[3]; // 日本語/英語など自由
+            // slug は slug_number に統一
+            return ["{$memberSlug}_{$number}", $title];
+        }
+
+        // 想定外形式の場合のフォールバック（タイトルはそのまま使う）
+        $fallbackSlug = "{$memberSlug}_" . substr(md5($fileBase), 0, 6);
+        return [$fallbackSlug, $fileBase];
     }
 }
