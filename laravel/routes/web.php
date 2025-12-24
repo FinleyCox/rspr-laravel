@@ -27,11 +27,19 @@ Route::prefix('categories')->group(function () {
     Route::get('/{slug}', function (VisitCounter $counter, string $slug) {
         $category = Category::where('slug', $slug)->firstOrFail();
         $categoryId = $category->id;
+        $categoryType = $category->type;
         // カテゴリIDが一致する作品だけを持つメンバーを取得
-        $members = Member::with(['works' => function ($query) use ($categoryId) {
+        $members = Member::with(['works' => function ($query) use ($categoryId, $categoryType) {
             $query->where('category_id', $categoryId);
-        }])->whereHas('works', function ($query) use ($categoryId) {
+            // 同じカテゴリ番号でもイラスト／小説で混ざらないようにする
+            if ($categoryType !== null && $categoryType !== '') {
+                $query->where('type', $categoryType);
+            }
+        }])->whereHas('works', function ($query) use ($categoryId, $categoryType) {
             $query->where('category_id', $categoryId);
+            if ($categoryType !== null && $categoryType !== '') {
+                $query->where('type', $categoryType);
+            }
         })->get();
         // popup用にslug一致の画像を特定
         $popupSlug = request('popup');

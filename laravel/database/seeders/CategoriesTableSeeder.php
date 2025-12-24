@@ -20,10 +20,10 @@ class CategoriesTableSeeder extends Seeder
                 'updated_at' => $now,
             ],
             [
-                'slug' => 'category2',
-                'name' => 'カテゴリ2',
+                'slug' => 'novel-category1',
+                'name' => 'カテゴリ1',
                 'type' => '1', // 1 = novel
-                'description' => '小説用カテゴリ2',
+                'description' => '小説用カテゴリ1',
                 'created_at' => $now,
                 'updated_at' => $now,
             ],
