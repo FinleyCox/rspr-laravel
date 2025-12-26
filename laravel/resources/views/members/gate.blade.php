@@ -9,7 +9,7 @@
     <p class="notice-text">
         ここから先は裏サイトです。苦手な方や18歳未満の方は戻るを選んでください。
     </p>
-    <button onclick="location.href='{{ route('members.beeskneeswanker') }}'" class="enter-button">
+    <button onclick="location.href='{{ route('adult.home') }}'" class="enter-button">
         入る
     </button>
     <button onclick="location.href='{{ route('entrance') }}'" class="enter-button">

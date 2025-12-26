@@ -9,6 +9,10 @@ body {
     color: #000000;
     cursor: url("../cursors/pointer.cur"), auto;
 }
+body.adult {
+    background: #000000;
+    color: #ffffff;
+}
 a {
     color: #000000;
     text-decoration: underline;
@@ -17,6 +21,33 @@ a {
 a:hover {
     text-decoration: none;
     cursor: url("../cursors/link.cur"), pointer;
+}
+body.adult a {
+    color: #ffffff;
+}
+body.adult .marker-square,
+body.adult .marker-circle {
+    color: #ffffff;
+}
+body.adult .sidebar {
+    background: #000000;
+    border-right-color: #ffffff;
+}
+body.adult section h2 {
+    border-bottom-color: #aaaaaa;
+}
+body.adult .enter-button,
+body.adult .show-more,
+body.adult #midi-toggle,
+body.adult .image-modal__close {
+    background: #000000;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+}
+body.adult .image-modal__content {
+    background: #111111;
+    color: #ffffff;
+    border-color: #ffffff;
 }
 
 /* ===== エントランス ===== */

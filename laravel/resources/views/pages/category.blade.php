@@ -1,15 +1,18 @@
-@extends('layouts.app')
-
-@section('title', 'リゾプロ - カテゴリー')
-@section('body_class', 'home')
-
-@section('content')
 @php
     $visitCount = $visitCount ?? 0;
     $categoryName = $category->name ?? 'カテゴリ';
     $categoryType = (string)($category->type ?? '0');
     $popupImage = $popupImage ?? null;
+    $adultMode = $adultMode ?? false;
+    $categoryRouteName = $categoryRouteName ?? ($adultMode ? 'adult.categories.show' : 'categories.show');
+    $routeParamsBase = $adultMode ? ['adult' => 1] : [];
 @endphp
+@extends('layouts.app')
+
+@section('title', 'リゾプロ - カテゴリー')
+@section('body_class', $adultMode ? 'home adult' : 'home')
+
+@section('content')
 <div class="midi-player">
     <button id="midi-toggle">♪ BGM ON</button>
     <audio id="bgm" loop>
@@ -27,7 +30,7 @@
                     <li class="member-card">
                         <div class="member-card__header">
                             <span class="marker-square">⇨</span>
-                            <a href="{{ route('members.show', ['slug' => $member->slug]) }}" target="_blank" rel="noopener">
+                            <a href="{{ route('members.show', array_merge(['slug' => $member->slug], $routeParamsBase)) }}" target="_blank" rel="noopener">
                                 {{ $member->display_name }}のページへ
                             </a>
                         </div>
@@ -35,7 +38,7 @@
                             @foreach ($member->works as $work)
                                 <li>
                                     <a
-                                        href="{{ route('categories.show', ['slug' => $category->slug, 'popup' => $work->slug]) }}"
+                                        href="{{ route($categoryRouteName, array_merge(['slug' => $category->slug, 'popup' => $work->slug], $routeParamsBase)) }}"
                                         data-popup-image="{{ asset($work->asset_path) }}"
                                         data-popup-slug="{{ $work->slug }}"
                                     >

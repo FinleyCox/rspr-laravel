@@ -1,12 +1,15 @@
+@php
+    $visitCount = $visitCount ?? 0;
+    $adultMode = $adultMode ?? false;
+    $categoryRouteName = $adultMode ? 'adult.categories.show' : 'categories.show';
+    $routeParamsBase = $adultMode ? ['adult' => 1] : [];
+@endphp
 @extends('layouts.app')
 
 @section('title', 'リゾプロ - Home')
-@section('body_class', 'home')
+@section('body_class', $adultMode ? 'home adult' : 'home')
 
 @section('content')
-@php
-    $visitCount = $visitCount ?? 0;
-@endphp
 <div class="midi-player">
     <button id="midi-toggle">♪ BGM ON</button>
     <audio id="bgm" loop>
@@ -53,7 +56,8 @@
             <ul class="illust-list" id="illust-list">
                 {{-- カテゴリはDBから表示 --}}
                 @forelse ($illustCategories as $category)
-                    <li><span class="marker-square">■</span><a href="{{ route('categories.show', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
+                    @php $params = array_merge(['slug' => $category->slug], $routeParamsBase); @endphp
+                    <li><span class="marker-square">■</span><a href="{{ route($categoryRouteName, $params) }}">{{ $category->name }}</a></li>
                 @empty
                     <li>カテゴリがありません。</li>
                 @endforelse
@@ -63,7 +67,8 @@
             <h2>小説置き場</h2>
             <ul class="novel-list" id="novel-list">
                 @forelse ($novelCategories as $category)
-                    <li><span class="marker-circle">◻︎</span><a href="{{ route('categories.show', ['slug' => $category->slug]) }}">{{ $category->name }}</a></li>
+                    @php $params = array_merge(['slug' => $category->slug], $routeParamsBase); @endphp
+                    <li><span class="marker-circle">◻︎</span><a href="{{ route($categoryRouteName, $params) }}">{{ $category->name }}</a></li>
                 @empty
                     <li>カテゴリがありません。</li>
                 @endforelse
@@ -74,7 +79,7 @@
             <ul class="member-list" id="member-list">
                 @forelse ($members ?? [] as $member)
                     <li>
-                        <a href="{{ route('members.show', ['slug' => $member->slug]) }}" target="_blank" rel="noopener" class="member-banner-link">
+                        <a href="{{ route('members.show', array_merge(['slug' => $member->slug], $routeParamsBase)) }}" target="_blank" rel="noopener" class="member-banner-link">
                             @if ($member->banner_path)
                                 <img src="{{ asset($member->banner_path) }}" alt="（バナー）{{ $member->display_name }}作品ページへ">
                             @else

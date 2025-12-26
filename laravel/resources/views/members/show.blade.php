@@ -1,13 +1,15 @@
-@extends('layouts.app')
-
-@section('title', 'リゾプロ - メンバー')
-@section('body_class', 'member-page')
-
-@section('content')
 @php
     // 作品タイプで表示マーカーを変えるための簡易判定
     $popupImage = $popupImage ?? null;
+    $adultMode = $adultMode ?? false;
+    $routeParamsBase = $adultMode ? ['adult' => 1] : [];
 @endphp
+@extends('layouts.app')
+
+@section('title', 'リゾプロ - メンバー')
+@section('body_class', $adultMode ? 'member-page adult' : 'member-page')
+
+@section('content')
 
 <div class="member-profile">
     <h4 class="member-name">{{ $member->display_name }}のページ</h4>
@@ -21,7 +23,7 @@
                     <li>
                         <span class="marker-square">■</span>
                         <a
-                            href="{{ route('members.show', ['slug' => $member->slug, 'popup' => $work->slug]) }}"
+                            href="{{ route('members.show', array_merge(['slug' => $member->slug, 'popup' => $work->slug], $routeParamsBase)) }}"
                             data-popup-image="{{ asset($work->asset_path) }}"
                             data-popup-slug="{{ $work->slug }}"
                         >
@@ -41,7 +43,7 @@
                     <li>
                         <span class="marker-circle">◻︎</span>
                         <a
-                            href="{{ route('members.show', ['slug' => $member->slug, 'popup' => $work->slug]) }}"
+                            href="{{ route('members.show', array_merge(['slug' => $member->slug, 'popup' => $work->slug], $routeParamsBase)) }}"
                             data-popup-image="{{ asset($work->asset_path) }}"
                             data-popup-slug="{{ $work->slug }}"
                         >
