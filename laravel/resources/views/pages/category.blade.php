@@ -33,13 +33,7 @@
                         </div>
                         <ul class="member-card__works">
                             @foreach ($member->works as $work)
-                                {{-- @php
-                                    $isNovel = (string)$work->type === '1';
-                                    $markerClass = $isNovel ? 'marker-circle' : 'marker-square';
-                                    $markerSymbol = $isNovel ? '◻︎' : '■';
-                                @endphp --}}
                                 <li>
-                                    {{-- <span class="{{ $markerClass }}">{{ $markerSymbol }}</span> --}}
                                     <a
                                         href="{{ route('categories.show', ['slug' => $category->slug, 'popup' => $work->slug]) }}"
                                         data-popup-image="{{ asset($work->asset_path) }}"

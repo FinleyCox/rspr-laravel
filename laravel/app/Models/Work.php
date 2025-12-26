@@ -18,6 +18,7 @@ class Work extends Model
         'slug',
         'title',
         'type',
+        'is_adult',
         'asset_path',
         'summary',
         'published_at',
@@ -25,6 +26,7 @@ class Work extends Model
 
     protected $casts = [
         'published_at' => 'datetime',
+        'is_adult' => 'boolean',
     ];
 
     public function member(): BelongsTo

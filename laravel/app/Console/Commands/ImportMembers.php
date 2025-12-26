@@ -122,6 +122,7 @@ class ImportMembers extends Command
                                 'category_id' => $categoryId, // CSVで指定があれば上書き
                                 'title' => $workTitle,
                                 'type' => $workType,
+                                'is_adult' => false,
                                 'asset_path' => $assetPath,
                                 'summary' => null,
                                 'published_at' => null,
@@ -129,7 +130,7 @@ class ImportMembers extends Command
                                 'updated_at' => now(),
                             ]],
                             ['slug'],
-                            ['member_id', 'category_id', 'title', 'type', 'asset_path', 'summary', 'published_at', 'updated_at']
+                            ['member_id', 'category_id', 'title', 'type', 'is_adult', 'asset_path', 'summary', 'published_at', 'updated_at']
                         );
                     }
                 }

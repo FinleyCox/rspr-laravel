@@ -14,6 +14,7 @@ return new class extends Migration
             $table->string('slug')->unique(); // メンバー内での作品識別子
             $table->string('title');
             $table->string('type'); // illust/novelなど
+            $table->boolean('is_adult')->default(false);
             $table->string('asset_path'); // 画像や本文ファイルのパス
             $table->text('summary')->nullable();
             $table->timestamp('published_at')->nullable();
