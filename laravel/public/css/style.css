@@ -2,40 +2,49 @@
 * {
     box-sizing: border-box;
 }
+
 body {
     margin: 0;
     font-family: "MS Pゴシック", "ヒラギノ角ゴ ProN W3", sans-serif;
-    background: #ffffff;
+    background: #ebf6f7;
     color: #000000;
     cursor: url("../cursors/pointer.cur"), auto;
 }
+
 body.adult {
     background: #000000;
     color: #ffffff;
 }
+
 a {
     color: #000000;
     text-decoration: underline;
 }
+
 /* TODO text-decoration underlineがunderlineいるかどうか決める */
 a:hover {
     text-decoration: none;
     cursor: url("../cursors/link.cur"), pointer;
 }
+
 body.adult a {
     color: #ffffff;
 }
+
 body.adult .marker-square,
 body.adult .marker-circle {
     color: #ffffff;
 }
+
 body.adult .sidebar {
     background: #000000;
     border-right-color: #ffffff;
 }
+
 body.adult section h2 {
     border-bottom-color: #aaaaaa;
 }
+
 body.adult .enter-button,
 body.adult .show-more,
 body.adult #midi-toggle,
@@ -44,6 +53,7 @@ body.adult .image-modal__close {
     color: #ffffff;
     border: 1px solid #ffffff;
 }
+
 body.adult .image-modal__content {
     background: #111111;
     color: #ffffff;
@@ -57,6 +67,7 @@ body.entrance {
     justify-content: center;
     min-height: 100vh;
 }
+
 .entrance-box {
     border: 2px solid #000000;
     padding: 24px 40px;
@@ -64,10 +75,12 @@ body.entrance {
     text-align: center;
     max-width: 500px;
 }
+
 .entrance-box h1 {
     margin-top: 0;
     font-size: 2rem;
 }
+
 .enter-button {
     margin-top: 16px;
     padding: 8px 24px;
@@ -81,12 +94,14 @@ body.entrance {
     display: flex;
     min-height: 100vh;
 }
+
 .sidebar {
     width: 220px;
     padding: 16px;
-    background: #ffffff;
+    background: #ebf6f7;
     border-right: 2px solid #000000;
 }
+
 .content {
     flex: 1;
     padding: 16px 24px;
@@ -112,6 +127,7 @@ body.entrance {
     list-style: none;
     padding-left: 0;
 }
+
 .menu li {
     margin-bottom: 8px;
 }
@@ -123,10 +139,12 @@ body.entrance {
     border-top: 1px solid #000000;
     font-size: 0.8rem;
 }
+
 #counter-digits {
     display: inline-flex;
     margin: 0 4px;
 }
+
 .counter-digit {
     width: 14px;
     height: 20px;
@@ -137,6 +155,7 @@ body.entrance {
 section {
     margin-bottom: 32px;
 }
+
 section h2 {
     border-bottom: 1px dashed #666699;
     padding-bottom: 4px;
@@ -150,17 +169,21 @@ section h2 {
     list-style: none;
     padding-left: 0;
 }
+
 .hidden-item {
     display: none;
 }
+
 .illust-list li,
 .novel-list li {
     margin-bottom: 6px;
 }
+
 .marker-square {
     color: #000000;
     margin-right: 6px;
 }
+
 .marker-circle {
     color: #000000;
     margin-right: 6px;
@@ -171,23 +194,28 @@ section h2 {
     list-style: none;
     padding-left: 0;
 }
+
 .member-list li {
     margin-bottom: 12px;
 }
+
 .member-name {
     font-size: 0.9rem;
 }
+
 .space {
     margin-left: 6px;
     font-size: 0.8rem;
     color: #000000;
 }
+
 .member-banner-link img {
     margin-top: 4px;
     max-width: 180px;
     border: 2px solid #5aa68a;
     background: #5aa68a;
 }
+
 .show-more {
     margin-top: 8px;
     padding: 6px 12px;
@@ -204,6 +232,7 @@ section h2 {
     right: 8px;
     z-index: 1000;
 }
+
 #midi-toggle {
     padding: 4px 10px;
     font-size: 0.75rem;
@@ -218,6 +247,7 @@ section h2 {
     margin: 0 auto;
     padding: 24px 16px;
 }
+
 .member-hero__banner {
     width: 100%;
     border: 2px solid #5aa68a;
@@ -225,17 +255,20 @@ section h2 {
     display: block;
     margin-bottom: 16px;
 }
+
 .member-hero__thumbs {
     display: flex;
     gap: 12px;
     flex-wrap: wrap;
     margin-bottom: 20px;
 }
+
 .member-hero__thumbs img {
     width: calc(33% - 8px);
     min-width: 180px;
     border: 2px solid #000000;
 }
+
 .image-modal {
     position: fixed;
     inset: 0;
@@ -244,14 +277,17 @@ section h2 {
     justify-content: center;
     z-index: 2000;
 }
+
 .image-modal.is-open {
     display: flex;
 }
+
 .image-modal__backdrop {
     position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.35);
 }
+
 .image-modal__content {
     position: relative;
     background: #ffffff;
@@ -261,11 +297,13 @@ section h2 {
     max-height: 90vh;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
 }
+
 .image-modal__content img {
     max-width: 80vw;
     max-height: 80vh;
     display: block;
 }
+
 .image-modal__close {
     position: absolute;
     top: 4px;
@@ -278,18 +316,123 @@ section h2 {
 
 /* ===== Responsive ===== */
 @media (max-width: 768px) {
-.layout {
-    flex-direction: column;
+    .layout {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        border-right: none;
+        border-bottom: 2px solid #000000;
+    }
+
+    .member-hero__thumbs {
+        flex-direction: column;
+    }
+
+    .member-hero__thumbs img {
+        width: 100%;
+    }
 }
-.sidebar {
+
+/* ===== Contact Page Modern Styles ===== */
+#contact {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+#contact h2 {
+    text-align: center;
+    border-bottom: 1px dashed #666699;
+    padding-bottom: 4px;
+    font-size: 1.4rem;
+    margin-bottom: 24px;
+}
+
+#contact h2::after {
+    display: none;
+}
+
+.contact-form {
+    background: #ffffff;
+    padding: 24px 40px;
+    border: 2px solid #000000;
+    /* Removed modern shadow & radius to match entrance-box */
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: normal;
+    color: #000000;
+    font-size: 1rem;
+}
+
+.contact-form input[type="email"],
+.contact-form textarea {
     width: 100%;
-    border-right: none;
-    border-bottom: 2px solid #000000;
+    padding: 10px;
+    border: 1px solid #000000;
+    border-radius: 0;
+    font-size: 1rem;
+    background: #ffffff;
+    box-shadow: none;
 }
-.member-hero__thumbs {
-    flex-direction: column;
+
+.contact-form input[type="email"]:focus,
+.contact-form textarea:focus {
+    outline: none;
+    border-color: #000000;
+    background: #ffffff;
+    box-shadow: none;
 }
-.member-hero__thumbs img {
+
+.contact-form textarea {
+    resize: vertical;
+    min-height: 120px;
+}
+
+.contact-form button[type="submit"] {
     width: 100%;
+    margin-top: 16px;
+    padding: 8px 24px;
+    border: 1px solid #000000;
+    background: #ffffff;
+    color: #000000;
+    font-weight: normal;
+    border-radius: 0;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: none;
+    box-shadow: none;
 }
+
+.contact-form button[type="submit"]:hover {
+    background: #000000;
+    color: #ffffff;
+    transform: none;
+    box-shadow: none;
+}
+
+.error {
+    display: block;
+    color: #e74c3c;
+    font-size: 0.85rem;
+    margin-top: 6px;
+    padding-left: 4px;
+}
+
+.alert-success {
+    background-color: #ffffff;
+    color: #000000;
+    padding: 15px;
+    border: 2px solid #000000;
+    margin-bottom: 20px;
+    text-align: center;
 }

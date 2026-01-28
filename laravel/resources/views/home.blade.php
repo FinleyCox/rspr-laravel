@@ -6,7 +6,7 @@
 @endphp
 @extends('layouts.app')
 
-@section('title', 'リゾプロ - Home')
+@section('title', 'Riso×Pro - Home')
 @section('body_class', $adultMode ? 'home adult' : 'home')
 
 @section('content')
@@ -19,31 +19,7 @@
 </div>
 <div class="layout">
     <!-- サイドバー -->
-    <aside class="sidebar">
-        <h1 class="site-title">リゾプロ</h1>
-        <nav class="menu">
-            <ul>
-                <li><a href="#illust-section">イラスト置き場</a></li>
-                <li><a href="#novel-section">小説置き場</a></li>
-                <li><a href="#members-section">参加メンバー</a></li>
-            </ul>
-        </nav>
-        <div class="counter-box">
-            <div>COUNTER</div>
-            <div id="counter">
-                あなたは
-                <span
-                    id="counter-digits"
-                    data-count="{{ $visitCount }}"
-                    data-digits-base="{{ asset('digits') }}"
-                    data-pad="5"
-                >
-                    {{ $visitCount }}
-                </span>
-                人目の訪問者です。
-            </div>
-        </div>
-    </aside>
+    @include('partials.sidebar')
     <!-- 真ん中 -->
     <main class="content">
         @php
@@ -51,6 +27,24 @@
             $illustCategories = $categoryList->where('type', '0');
             $novelCategories = $categoryList->where('type', '1');
         @endphp
+        <section id="about">
+            <h2>サイトについて</h2>
+            <p>このサイトは、Riso×Proのメンバーが作品を公開するサイトです。</p>
+        </section>
+        @if(isset($latestInfos) && $latestInfos->count() > 0)
+        <section id="info">
+            <h2>お知らせ</h2>
+                <ul class="info-list">
+                    @foreach($latestInfos as $info)
+                        <li>
+                            <span class="date">{{ $info->created_at->format('Y/m/d') }}</span>
+                            <span class="content">{{ Str::limit($info->content, 50) }}</span>
+                        </li>
+                    @endforeach
+                </ul>
+            <p><a href="{{ route('info') }}">お知らせ一覧へ</a></p>
+        @endif
+        </section>
         <section id="illust-section">
             <h2>イラスト置き場</h2>
             <ul class="illust-list" id="illust-list">

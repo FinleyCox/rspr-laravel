@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'リゾプロ - 裏Entrance')
+@section('title', 'Riso×Pro - 裏Entrance')
 @section('body_class', 'entrance')
 
 @section('content')

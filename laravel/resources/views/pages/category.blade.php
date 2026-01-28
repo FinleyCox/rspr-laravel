@@ -9,7 +9,7 @@
 @endphp
 @extends('layouts.app')
 
-@section('title', 'リゾプロ - カテゴリー')
+@section('title', 'Riso×Pro - カテゴリー')
 @section('body_class', $adultMode ? 'home adult' : 'home')
 
 @section('content')
