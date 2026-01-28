@@ -5,6 +5,7 @@ use App\Models\Category;
 use App\Models\Member;
 use App\Models\Work;
 use Illuminate\Support\Facades\View;
+use App\Models\Info;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function (VisitCounter $counter) {
@@ -16,11 +17,13 @@ Route::get('/', function (VisitCounter $counter) {
 Route::get('/home', function (VisitCounter $counter) {
     $categories = Category::orderBy('id')->get();
     $members = Member::orderBy('id')->get();
+    $latestInfos = Info::orderBy('created_at', 'desc')->take(3)->get();
     return view('home', [
         'visitCount' => $counter->current(),
         'adultMode' => false,
         'categories' => $categories,
         'members' => $members,
+        'latestInfos' => $latestInfos,
     ]);
 })->name('home');
 
@@ -142,3 +145,10 @@ Route::prefix('members')->group(function () {
         ]);
     })->name('members.show');
 });
+
+use App\Http\Controllers\PageController;
+
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/info', [PageController::class, 'info'])->name('info');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::post('/contact', [PageController::class, 'sendContact'])->name('contact.send');

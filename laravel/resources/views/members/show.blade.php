@@ -6,7 +6,7 @@
 @endphp
 @extends('layouts.app')
 
-@section('title', 'リゾプロ - メンバー')
+@section('title', 'Riso×Pro - メンバー')
 @section('body_class', $adultMode ? 'member-page adult' : 'member-page')
 
 @section('content')
