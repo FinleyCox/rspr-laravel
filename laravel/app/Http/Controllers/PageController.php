@@ -37,6 +37,9 @@ class PageController extends Controller
         
         Mail::to($adminEmail)->send(new ContactMail($validated));
         
+        // 自動返信メールを送信
+        Mail::to($validated['email'])->send(new \App\Mail\ContactAutoReply($validated));
+        
         return back()->with('success', 'お問い合わせを送信しました。');
     }
 }
