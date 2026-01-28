@@ -19,7 +19,6 @@
 </div>
 <div class="layout">
     <!-- サイドバー -->
-    <!-- サイドバー -->
     @include('partials.sidebar')
     <!-- 真ん中 -->
     <main class="content">
@@ -88,10 +87,6 @@
             </ul>
             <button class="show-more" data-target="#member-list" aria-expanded="false" type="button">もっと見る</button>
         </section>
-        <!-- <section id="contact">
-            <h2>お問い合わせ</h2>
-            <p>お問い合わせはこちらから。</p>
-        </section> -->
     </main>
 </div>
 @endsection

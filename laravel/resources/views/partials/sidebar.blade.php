@@ -8,6 +8,9 @@
             <li><a href="{{ route('home') }}#novel-section">小説置き場</a></li>
             <li><a href="{{ route('home') }}#members-section">参加メンバー</a></li>
             <li><a href="{{ route('contact') }}">お問い合わせ</a></li>
+            @if($adultMode)
+            <li><a href="{{ route('home', ['adult' => 0]) }}">表に戻る</a></li>
+            @endif
         </ul>
     </nav>
     <div class="counter-box">
