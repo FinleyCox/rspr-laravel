@@ -10,13 +10,13 @@
 @section('body_class', $adultMode ? 'home adult' : 'home')
 
 @section('content')
-<div class="midi-player">
+<!-- <div class="midi-player">
     <button id="midi-toggle">♪ BGM ON</button>
     <audio id="bgm" loop>
         <source src="{{ asset('midi/opening.mid') }}" type="audio/midi">
         ブラウザによっては再生されない場合があります。
     </audio>
-</div>
+</div> -->
 <div class="layout">
     <!-- サイドバー -->
     @include('partials.sidebar')
