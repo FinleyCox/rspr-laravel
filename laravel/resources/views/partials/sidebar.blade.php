@@ -1,5 +1,7 @@
 <aside class="sidebar">
-    <h1 class="site-title">Riso×Pro</h1>
+    <h1 class="site-title">
+        <a href="{{ route('home') }}"><img src="{{ asset('img/logos/icon.jpg') }}" alt="Riso×Pro" class="site-header-img sidebar-icon"></a>
+    </h1>
     <nav class="menu">
         <ul>
             <li><a href="{{ route('about') }}">サイトについて</a></li>

@@ -29,6 +29,7 @@
             $novelCategories = $categoryList->where('type', '1');
         @endphp
         <section id="about">
+            <img src="{{ asset('img/logos/header.jpg') }}" alt="Riso×Pro" class="home-header-img">
             <h1>HOME</h1>
             <h2>サイトについて</h2>
             <p>このサイトは、Riso×Proのメンバーが作品を公開するサイトです。</p>

@@ -113,6 +113,30 @@ body.entrance {
     margin: 0 0 12px 0;
 }
 
+/* ヘッダーロゴ画像 */
+.site-header-img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* サイドバーのアイコン（丸く） */
+.sidebar-icon {
+    width: 110px;
+    height: 110px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+
+/* home HOMEセクション上部バナー */
+.home-header-img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    display: block;
+    margin-bottom: 12px;
+}
+
 /* Banner */
 .site-banner img {
     width: 100%;

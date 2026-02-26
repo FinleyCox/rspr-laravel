@@ -6,7 +6,9 @@
 @section('content')
 <div class="entrance-wrapper" style="text-align: center;">
     <div class="entrance-box">
-        <h1 class="site-title">Riso×Pro</h1>
+        <h1 class="site-title">
+            <img src="{{ asset('img/logos/header.jpg') }}" alt="Riso×Pro" class="site-header-img">
+        </h1>
         <p class="notice-text">
             ここは有志で運営する同人サイトです。<br>
             二次創作・BL表現などを含む場合があります。<br>
