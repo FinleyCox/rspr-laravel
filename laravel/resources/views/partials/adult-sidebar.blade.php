@@ -4,9 +4,9 @@
     <nav class="menu">
         <ul>
             <li><a href="{{ route('adult.home') }}">ホーム</a></li>
-            <li><a href="{{ route('adult.home') }}#illust-section">イラスト置き場</a></li>
-            <li><a href="{{ route('adult.home') }}#novel-section">小説置き場</a></li>
-            <li><a href="{{ route('adult.home') }}#members-section">参加メンバー</a></li>
+            <li><a href="{{ route('adult.illust') }}">イラスト置き場</a></li>
+            <li><a href="{{ route('adult.novel') }}">小説置き場</a></li>
+            <li><a href="{{ route('adult.members.index') }}">参加メンバー</a></li>
             <li><a href="{{ route('home') }}">表に戻る</a></li>
         </ul>
     </nav>

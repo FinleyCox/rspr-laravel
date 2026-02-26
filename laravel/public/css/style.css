@@ -140,13 +140,22 @@ body.entrance {
     font-size: 0.8rem;
 }
 
-/* エントランスへ戻るリンク */
+/* エントランスへ戻るボタン */
 .entrance-back {
     margin-top: 12px;
     padding-top: 8px;
     border-top: 1px solid #000000;
-    font-size: 0.8rem;
     text-align: center;
+}
+
+.entrance-back__btn {
+    width: 100%;
+    padding: 6px 8px;
+    font-size: 0.8rem;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #000000;
+    cursor: url("../cursors/link.cur"), pointer;
 }
 
 #counter-digits {
