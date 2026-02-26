@@ -21,6 +21,8 @@
     </audio>
 </div> -->
 <div class="layout">
+    @includeWhen(!$adultMode, 'partials.sidebar')
+    @includeWhen($adultMode, 'partials.adult-sidebar')
     <main class="content">
         <section id="illust-section">
             <h2>{{ $categoryName }}</h2>
@@ -53,6 +55,7 @@
                 @endforelse
             </ul>
         </section>
+        <p><a href="{{ $adultMode ? route('adult.home') : route('home') }}">ホームへ戻る</a></p>
     </main>
 </div>
 <div id="image-modal" class="image-modal" data-show="{{ $popupImage ? '1' : '0' }}" data-image="{{ $popupImage }}">

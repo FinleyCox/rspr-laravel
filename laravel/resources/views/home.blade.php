@@ -19,7 +19,8 @@
 </div> -->
 <div class="layout">
     <!-- サイドバー -->
-    @include('partials.sidebar')
+    @includeWhen(!$adultMode, 'partials.sidebar')
+    @includeWhen($adultMode, 'partials.adult-sidebar')
     <!-- 真ん中 -->
     <main class="content">
         @php
@@ -28,6 +29,7 @@
             $novelCategories = $categoryList->where('type', '1');
         @endphp
         <section id="about">
+            <h1>HOME</h1>
             <h2>サイトについて</h2>
             <p>このサイトは、Riso×Proのメンバーが作品を公開するサイトです。</p>
         </section>

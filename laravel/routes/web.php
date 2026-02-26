@@ -27,6 +27,26 @@ Route::get('/home', function (VisitCounter $counter) {
     ]);
 })->name('home');
 
+// イラスト置き場ページ（表）
+Route::get('/illust', function (VisitCounter $counter) {
+    $categories = Category::where('type', '0')->orderBy('id')->get();
+    return view('pages.illust', [
+        'visitCount' => $counter->current(),
+        'adultMode' => false,
+        'categories' => $categories,
+    ]);
+})->name('illust');
+
+// 小説置き場ページ（表）
+Route::get('/novel', function (VisitCounter $counter) {
+    $categories = Category::where('type', '1')->orderBy('id')->get();
+    return view('pages.novel', [
+        'visitCount' => $counter->current(),
+        'adultMode' => false,
+        'categories' => $categories,
+    ]);
+})->name('novel');
+
 Route::prefix('categories')->group(function () {
     Route::get('/{slug}', function (VisitCounter $counter, string $slug) {
         $category = Category::where('slug', $slug)->firstOrFail();
@@ -79,6 +99,36 @@ Route::prefix('adult')->name('adult.')->group(function () {
         ]);
     })->name('home');
 
+    // イラスト置き場ページ（裏）
+    Route::get('/illust', function (VisitCounter $counter) {
+        $categories = Category::where('type', '0')->orderBy('id')->get();
+        return view('pages.illust', [
+            'visitCount' => $counter->current(),
+            'adultMode' => true,
+            'categories' => $categories,
+        ]);
+    })->name('illust');
+
+    // 小説置き場ページ（裏）
+    Route::get('/novel', function (VisitCounter $counter) {
+        $categories = Category::where('type', '1')->orderBy('id')->get();
+        return view('pages.novel', [
+            'visitCount' => $counter->current(),
+            'adultMode' => true,
+            'categories' => $categories,
+        ]);
+    })->name('novel');
+
+    // 参加メンバーページ（裏）
+    Route::get('/members', function (VisitCounter $counter) {
+        $members = Member::orderBy('id')->get();
+        return view('pages.members-list', [
+            'visitCount' => $counter->current(),
+            'adultMode' => true,
+            'members' => $members,
+        ]);
+    })->name('members.index');
+
     Route::get('/categories/{slug}', function (VisitCounter $counter, string $slug) {
         $category = Category::where('slug', $slug)->firstOrFail();
         $categoryId = $category->id;
@@ -118,6 +168,15 @@ Route::prefix('adult')->name('adult.')->group(function () {
 
 Route::prefix('members')->group(function () {
     Route::view('/gate', 'members.gate')->name('members.gate');
+    // 参加メンバー一覧ページ（表）— {slug} より前に登録
+    Route::get('/', function (VisitCounter $counter) {
+        $members = Member::orderBy('id')->get();
+        return view('pages.members-list', [
+            'visitCount' => $counter->current(),
+            'adultMode' => false,
+            'members' => $members,
+        ]);
+    })->name('members.index');
     Route::get('/{slug}', function (string $slug) {
         $member = Member::where('slug', $slug)->firstOrFail();
         $adultMode = request()->boolean('adult');
