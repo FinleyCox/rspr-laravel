@@ -140,6 +140,15 @@ body.entrance {
     font-size: 0.8rem;
 }
 
+/* エントランスへ戻るリンク */
+.entrance-back {
+    margin-top: 12px;
+    padding-top: 8px;
+    border-top: 1px solid #000000;
+    font-size: 0.8rem;
+    text-align: center;
+}
+
 #counter-digits {
     display: inline-flex;
     margin: 0 4px;

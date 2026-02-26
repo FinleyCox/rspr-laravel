@@ -57,6 +57,7 @@
     @else
         <p>作品がまだありません。</p>
     @endif
+    <p><a href="{{ $adultMode ? route('adult.home') : route('home') }}">ホームへ戻る</a></p>
 </div>
 
 <div id="image-modal" class="image-modal" data-show="{{ $popupImage ? '1' : '0' }}" data-image="{{ $popupImage }}">

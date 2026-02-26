@@ -19,7 +19,8 @@
 </div> -->
 <div class="layout">
     <!-- サイドバー -->
-    @include('partials.sidebar')
+    @includeWhen(!$adultMode, 'partials.sidebar')
+    @includeWhen($adultMode, 'partials.adult-sidebar')
     <!-- 真ん中 -->
     <main class="content">
         @php

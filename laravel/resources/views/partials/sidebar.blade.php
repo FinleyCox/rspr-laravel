@@ -28,4 +28,7 @@
             人目の訪問者です。
         </div>
     </div>
+    <div class="entrance-back">
+        <a href="{{ route('entrance') }}">← エントランス</a>
+    </div>
 </aside>
