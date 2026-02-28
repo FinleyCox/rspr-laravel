@@ -14,7 +14,7 @@
         $mainJsVersion = @filemtime(public_path('js/main.js')) ?: time();
     @endphp
     <script src="{{ asset('js/main.js') . '?v=' . $mainJsVersion }}"></script>
-    <div id="scroll-mascot" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; opacity: 0; transition: opacity 0.3s; pointer-events: none; cursor: pointer;">
+    <!-- <div id="scroll-mascot" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; opacity: 0; transition: opacity 0.3s; pointer-events: none; cursor: pointer;">
         <img src="{{ asset('images/scroll_mascot.png') }}" alt="Scroll Mascot" style="width: 120px; height: auto; max-width: 25vw;">
     </div>
     <script>
@@ -92,6 +92,6 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             });
         });
-    </script>
+    </script> -->
 </body>
 </html>
