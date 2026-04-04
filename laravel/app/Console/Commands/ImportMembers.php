@@ -107,22 +107,38 @@ class ImportMembers extends Command
                     $images = File::files($imgDir);
                     foreach ($images as $image) {
                         $ext = strtolower($image->getExtension());
-                        if (! in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg'])) {
+                        if (! in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'txt', 'pdf', 'md'])) {
                             continue;
                         }
                         $fileBase = $image->getFilenameWithoutExtension();
-                        // 命名規則: ユーザー名(slug)_番号_タイトル名（例: beeskneeswanker_0_xxxx）
-                        [$workSlug, $workTitle] = $this->parseWorkFilename($fileBase, $slug);
+                        $parsedInfo = $this->parseWorkFilename($fileBase, $slug);
+                        $workSlug = $parsedInfo['slug'];
+                        $workTitle = $parsedInfo['title'];
+                        $workType = $parsedInfo['type'] ?? '0'; // デフォルトは 0(illust)
+                        $isAdult = $parsedInfo['is_adult'] ?? false; // デフォルトは false(全年齢)
+
+                        $workCategoryId = $categoryId; // CSVの指定をデフォルトとする
+                        if ($parsedInfo['category_flag'] !== null) {
+                            $categoryName = $parsedInfo['category_flag'] === '0' ? '原作軸' : '現パロ';
+                            // DBからIDを取得
+                            $catId = DB::table('categories')
+                                ->where('name', $categoryName)
+                                ->where('type', $workType)
+                                ->value('id');
+                            if ($catId) {
+                                $workCategoryId = $catId;
+                            }
+                        }
+
                         $assetPath = "img/members/{$slug}/" . $image->getFilename();
-                        $workType = '0'; // 0=illustration, 1=novel
                         DB::table('works')->upsert(
                             [[
                                 'slug' => $workSlug,
                                 'member_id' => $memberId,
-                                'category_id' => $categoryId, // CSVで指定があれば上書き
+                                'category_id' => $workCategoryId,
                                 'title' => $workTitle,
                                 'type' => $workType,
-                                'is_adult' => false,
+                                'is_adult' => $isAdult,
                                 'asset_path' => $assetPath,
                                 'summary' => null,
                                 'published_at' => null,
@@ -178,16 +194,35 @@ class ImportMembers extends Command
 
     private function parseWorkFilename(string $fileBase, string $memberSlug): array
     {
-        // 期待形式: {memberSlug}_{number}_{titlePart}
-        if (preg_match('/^(.+?)_(\\d+?)_(.+)$/u', $fileBase, $m)) {
-            $number = $m[2];
-            $title = $m[3]; // 日本語/英語など自由
-            // slug は slug_number に統一
-            return ["{$memberSlug}_{$number}", $title];
+        // 新形式: {memberSlug}_{number}_{type}_{isAdult}_{categoryFlag}_{titlePart}
+        if (preg_match('/^(.+?)_(\\d+?)_([01])_([01])_([01])_(.+)$/u', $fileBase, $m)) {
+            return [
+                'slug' => "{$memberSlug}_{$m[2]}",
+                'type' => $m[3],
+                'is_adult' => $m[4] === '1',
+                'category_flag' => $m[5],
+                'title' => $m[6],
+            ];
         }
 
-        // 想定外形式の場合のフォールバック（タイトルはそのまま使う）
-        $fallbackSlug = "{$memberSlug}_" . substr(md5($fileBase), 0, 6);
-        return [$fallbackSlug, $fileBase];
+        // 旧形式: {memberSlug}_{number}_{titlePart}
+        if (preg_match('/^(.+?)_(\\d+?)_(.+)$/u', $fileBase, $m)) {
+            return [
+                'slug' => "{$memberSlug}_{$m[2]}",
+                'type' => null,
+                'is_adult' => null,
+                'category_flag' => null,
+                'title' => $m[3],
+            ];
+        }
+
+        // 想定外形式の場合のフォールバック
+        return [
+            'slug' => "{$memberSlug}_" . substr(md5($fileBase), 0, 6),
+            'type' => null,
+            'is_adult' => null,
+            'category_flag' => null,
+            'title' => $fileBase,
+        ];
     }
 }
