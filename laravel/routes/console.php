@@ -8,5 +8,8 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-// worksの自動同期ジョブを1時間ごとに実行する（必要に応じて適宜 ->everyMinute() や ->daily() に変更可能）
+// worksの自動同期ジョブを1時間ごとに実行する
 Schedule::command('works:sync')->hourly();
+
+// CSVからのメンバー情報インポートを1時間ごとに実行する
+Schedule::command('members:import')->hourly();
