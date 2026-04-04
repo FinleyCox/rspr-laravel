@@ -14,6 +14,22 @@ class PageController extends Controller
         return view('about');
     }
 
+    public function other()
+    {
+        return view('other');
+    }
+
+    public function countdown()
+    {
+        $categoryRouteName = request()->boolean('adult') ? 'adult.categories.show' : 'categories.show';
+        $routeParamsBase = request()->boolean('adult') ? ['adult' => 1] : [];
+        
+        $works = \App\Models\Work::with('member')->whereNotNull('countdown_day')->get();
+        $countdownWorks = $works->groupBy('countdown_day');
+
+        return view('countdown', compact('countdownWorks', 'categoryRouteName', 'routeParamsBase'));
+    }
+
     public function info()
     {
         $infos = Info::orderBy('created_at', 'desc')->paginate(10);

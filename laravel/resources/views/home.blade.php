@@ -71,6 +71,18 @@
                 @endforelse
             </ul>
         </section>
+        <section id="other-section">
+            <h2>その他置き場</h2>
+            <ul class="other-list" id="other-list">
+                <li><span class="marker-square">■</span><a href="{{ route('other') }}">その他の作品一覧</a></li>
+            </ul>
+        </section>
+        <section id="countdown-section">
+            <h2>カウントダウン</h2>
+            <ul class="countdown-list" id="countdown-list">
+                <li><span class="marker-circle">◻︎</span><a href="{{ route('countdown') }}">カウントダウンページへ</a></li>
+            </ul>
+        </section>
         <section id="members-section">
             <h2>参加メンバー</h2>
             <ul class="member-list" id="member-list">

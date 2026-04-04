@@ -8,6 +8,8 @@
             <li><a href="{{ route('info') }}">お知らせ</a></li>
             <li><a href="{{ route('illust') }}">イラスト置き場</a></li>
             <li><a href="{{ route('novel') }}">小説置き場</a></li>
+            <li><a href="{{ route('other') }}">その他置き場</a></li>
+            <li><a href="{{ route('countdown') }}">カウントダウン</a></li>
             <li><a href="{{ route('members.index') }}">参加メンバー</a></li>
             <li><a href="{{ route('contact') }}">お問い合わせ</a></li>
             @if($adultMode ?? false)

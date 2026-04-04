@@ -55,6 +55,8 @@ class SyncWorks extends Command
             }
 
             $images = File::files($dir);
+            $worksData = [];
+
             foreach ($images as $image) {
                 $ext = strtolower($image->getExtension());
                 if (!in_array($ext, ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'txt', 'pdf', 'md'])) {
@@ -64,9 +66,24 @@ class SyncWorks extends Command
                 $fileBase = $image->getFilenameWithoutExtension();
                 $parsedInfo = $this->parseWorkFilename($fileBase, $slug);
                 $workSlug = $parsedInfo['slug'];
+
+                if (!isset($worksData[$workSlug])) {
+                    $worksData[$workSlug] = [
+                        'info' => $parsedInfo,
+                        'paths' => []
+                    ];
+                }
+                $worksData[$workSlug]['paths'][] = "img/members/{$slug}/" . $image->getFilename();
+            }
+
+            foreach ($worksData as $workSlug => $data) {
+                sort($data['paths']); // ページ順にソート(p1, p2...)
+                $parsedInfo = $data['info'];
+                
                 $workTitle = $parsedInfo['title'];
                 $workType = $parsedInfo['type'] ?? '0'; // デフォルトはイラスト(0)
                 $isAdult = $parsedInfo['is_adult'] ?? false;
+                $countdownDay = $parsedInfo['countdown_day'] ?? null;
 
                 $workCategoryId = null;
                 if ($parsedInfo['category_flag'] !== null) {
@@ -77,7 +94,8 @@ class SyncWorks extends Command
                         ->value('id');
                 }
 
-                $assetPath = "img/members/{$slug}/" . $image->getFilename();
+                $assetPath = $data['paths'][0]; // 代表画像（1ページ目）
+                $assetPathsJson = json_encode($data['paths'], JSON_UNESCAPED_UNICODE);
 
                 DB::table('works')->upsert(
                     [[
@@ -88,19 +106,21 @@ class SyncWorks extends Command
                         'type' => $workType,
                         'is_adult' => $isAdult,
                         'asset_path' => $assetPath,
+                        'asset_paths' => $assetPathsJson,
+                        'countdown_day' => $countdownDay,
                         'summary' => null,
                         'published_at' => null,
                         'created_at' => now(),
                         'updated_at' => now(),
                     ]],
                     ['slug'],
-                    ['member_id', 'category_id', 'title', 'type', 'is_adult', 'asset_path', 'updated_at']
+                    ['member_id', 'category_id', 'title', 'type', 'is_adult', 'asset_path', 'asset_paths', 'countdown_day', 'updated_at']
                 );
                 $synced++;
             }
         }
 
-        $this->info("同期完了: {$synced}件の作品を処理しました。");
+        $this->info("同期完了: {$synced}件の作品（ページ数は含めず）を処理しました。");
         return Command::SUCCESS;
     }
 
@@ -109,35 +129,54 @@ class SyncWorks extends Command
      */
     private function parseWorkFilename(string $fileBase, string $memberSlug): array
     {
+        $parsed = [];
         // 新形式: {memberSlug}_{number}_{type}_{isAdult}_{categoryFlag}_{titlePart}
         if (preg_match('/^(.+?)_(\\d+?)_([01])_([01])_([01])_(.+)$/u', $fileBase, $m)) {
-            return [
+            $parsed = [
                 'slug' => "{$memberSlug}_{$m[2]}",
                 'type' => $m[3],
                 'is_adult' => $m[4] === '1',
                 'category_flag' => $m[5],
-                'title' => $m[6],
+                'raw_title' => $m[6],
             ];
         }
-
         // 旧形式: {memberSlug}_{number}_{titlePart}
-        if (preg_match('/^(.+?)_(\\d+?)_(.+)$/u', $fileBase, $m)) {
-            return [
+        elseif (preg_match('/^(.+?)_(\\d+?)_(.+)$/u', $fileBase, $m)) {
+            $parsed = [
                 'slug' => "{$memberSlug}_{$m[2]}",
                 'type' => null,
                 'is_adult' => null,
                 'category_flag' => null,
-                'title' => $m[3],
+                'raw_title' => $m[3],
+            ];
+        }
+        // 想定外形式の場合のフォールバック
+        else {
+            $parsed = [
+                'slug' => "{$memberSlug}_" . substr(md5($fileBase), 0, 6),
+                'type' => null,
+                'is_adult' => null,
+                'category_flag' => null,
+                'raw_title' => $fileBase,
             ];
         }
 
-        // 想定外形式の場合のフォールバック
-        return [
-            'slug' => "{$memberSlug}_" . substr(md5($fileBase), 0, 6),
-            'type' => null,
-            'is_adult' => null,
-            'category_flag' => null,
-            'title' => $fileBase,
-        ];
+        // タイトルからカウントダウン日とページ番号タグを除去・抽出
+        $title = $parsed['raw_title'];
+        $countdownDay = null;
+
+        if (preg_match('/@cd(\d+)/', $title, $cdMatch)) {
+            $countdownDay = (int)$cdMatch[1];
+            $title = str_replace($cdMatch[0], '', $title);
+        }
+
+        if (preg_match('/_p\d+$/', $title, $pMatch)) {
+            $title = preg_replace('/_p\d+$/', '', $title);
+        }
+
+        return array_merge($parsed, [
+            'title' => $title,
+            'countdown_day' => $countdownDay,
+        ]);
     }
 }

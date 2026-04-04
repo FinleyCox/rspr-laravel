@@ -211,3 +211,5 @@ Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/info', [PageController::class, 'info'])->name('info');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::post('/contact', [PageController::class, 'sendContact'])->name('contact.send');
+Route::get('/other', [PageController::class, 'other'])->name('other');
+Route::get('/countdown', [PageController::class, 'countdown'])->name('countdown');

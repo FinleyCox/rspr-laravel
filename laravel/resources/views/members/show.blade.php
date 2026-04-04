@@ -24,7 +24,7 @@
                         <span class="marker-square">■</span>
                         <a
                             href="{{ route('members.show', array_merge(['slug' => $member->slug, 'popup' => $work->slug], $routeParamsBase)) }}"
-                            data-popup-image="{{ asset($work->asset_path) }}"
+                            data-popup-images="{{ json_encode(array_map('asset', $work->asset_paths ?? [$work->asset_path]), JSON_UNESCAPED_SLASHES) }}"
                             data-popup-slug="{{ $work->slug }}"
                         >
                             {{ $work->title }}
@@ -44,7 +44,7 @@
                         <span class="marker-circle">◻︎</span>
                         <a
                             href="{{ route('members.show', array_merge(['slug' => $member->slug, 'popup' => $work->slug], $routeParamsBase)) }}"
-                            data-popup-image="{{ asset($work->asset_path) }}"
+                            data-popup-images="{{ json_encode(array_map('asset', $work->asset_paths ?? [$work->asset_path]), JSON_UNESCAPED_SLASHES) }}"
                             data-popup-slug="{{ $work->slug }}"
                         >
                             {{ $work->title }}
@@ -60,11 +60,13 @@
     <p><a href="{{ $adultMode ? route('adult.home') : route('home') }}">ホームへ戻る</a></p>
 </div>
 
-<div id="image-modal" class="image-modal" data-show="{{ $popupImage ? '1' : '0' }}" data-image="{{ $popupImage }}">
+<div id="image-modal" class="image-modal" data-show="{{ $popupImage ? '1' : '0' }}" data-images="{{ $popupImage ? json_encode(is_array($popupImage) ? array_map('asset', $popupImage) : [asset($popupImage)], JSON_UNESCAPED_SLASHES) : '[]' }}">
     <div class="image-modal__backdrop"></div>
     <div class="image-modal__content">
         <button class="image-modal__close" type="button">×</button>
-        <img src="{{ $popupImage ?? '' }}" alt="作品画像">
+        <div class="image-modal__image-container" style="display: flex; flex-direction: column; gap: 10px; align-items: center; overflow-y: auto; max-height: 80vh;">
+            {{-- Javascriptで複数画像が挿入されます --}}
+        </div>
     </div>
 </div>
 @endsection

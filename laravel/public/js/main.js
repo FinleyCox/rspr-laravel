@@ -98,8 +98,8 @@ document.addEventListener("DOMContentLoaded", () => {
     if (modal) {
         const backdrop = modal.querySelector(".image-modal__backdrop");
         const closeBtn = modal.querySelector(".image-modal__close");
-        const img = modal.querySelector("img");
-        const links = document.querySelectorAll("[data-popup-image][data-popup-slug]");
+        const container = modal.querySelector(".image-modal__image-container");
+        const links = document.querySelectorAll("[data-popup-images][data-popup-slug]");
 
         const hide = () => {
             modal.classList.remove("is-open");
@@ -108,17 +108,33 @@ document.addEventListener("DOMContentLoaded", () => {
             window.history.replaceState({}, "", url);
         };
 
-        const show = (src) => {
-            if (!src || !img) return;
-            img.src = src;
+        const show = (imagesJson) => {
+            if (!imagesJson || !container) return;
+            container.innerHTML = "";
+            let images = [];
+            try {
+                images = JSON.parse(imagesJson);
+            } catch (e) {
+                images = [imagesJson];
+            }
+            if (!Array.isArray(images)) images = [imagesJson];
+
+            images.forEach(src => {
+                const img = document.createElement("img");
+                img.src = src;
+                img.alt = "作品画像";
+                img.style.maxWidth = "100%";
+                img.style.height = "auto";
+                container.appendChild(img);
+            });
             modal.classList.add("is-open");
         };
 
         const openFromLink = (linkEl) => {
-            const image = linkEl.dataset.popupImage;
+            const images = linkEl.dataset.popupImages;
             const slug = linkEl.dataset.popupSlug;
-            if (!image) return;
-            show(image);
+            if (!images) return;
+            show(images);
 
             if (slug) {
                 const url = new URL(window.location.href);
@@ -134,8 +150,8 @@ document.addEventListener("DOMContentLoaded", () => {
             });
         });
 
-        if (modal.dataset.show === "1" && modal.dataset.image) {
-            show(modal.dataset.image);
+        if (modal.dataset.show === "1" && modal.dataset.images) {
+            show(modal.dataset.images);
         }
 
         backdrop?.addEventListener("click", hide);

@@ -20,6 +20,8 @@ class Work extends Model
         'type',
         'is_adult',
         'asset_path',
+        'asset_paths',
+        'countdown_day',
         'summary',
         'published_at',
     ];
@@ -27,6 +29,8 @@ class Work extends Model
     protected $casts = [
         'published_at' => 'datetime',
         'is_adult' => 'boolean',
+        'asset_paths' => 'array',
+        'countdown_day' => 'integer',
     ];
 
     public function member(): BelongsTo

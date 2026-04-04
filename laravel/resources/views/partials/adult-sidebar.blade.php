@@ -8,6 +8,8 @@
             <li><a href="{{ route('adult.home') }}">ホーム</a></li>
             <li><a href="{{ route('adult.illust') }}">イラスト置き場</a></li>
             <li><a href="{{ route('adult.novel') }}">小説置き場</a></li>
+            <li><a href="{{ route('other') }}">その他置き場</a></li>
+            <li><a href="{{ route('countdown') }}">カウントダウン</a></li>
             <li><a href="{{ route('adult.members.index') }}">参加メンバー</a></li>
             <li><a href="{{ route('home') }}">表に戻る</a></li>
         </ul>
